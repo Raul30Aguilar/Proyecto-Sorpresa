@@ -415,10 +415,19 @@ function ImageModal({
       exit={{ opacity: 0 }}
     >
       {/* Contenedor interno para evitar cerrar al hacer click en imagen */}
-      <div
-        onClick={(e) => e.stopPropagation()}
-        style={{ position: "relative", display: "flex", alignItems: "center" }}
-      >
+    <div
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        position: "relative",
+        width: "100%",
+        maxWidth: "900px",
+        height: "90dvh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
 
         {/* Botón cerrar */}
         <button style={styles.closeBtn} onClick={onClose}>
@@ -734,78 +743,78 @@ const styles = {
   justifyContent: "center",
   marginTop: "20px",
   flexWrap: "wrap"
-},
+  },
 
-timeBox: {
-  background: "rgba(255,255,255,0.1)",
-  padding: "15px 20px",
-  borderRadius: "15px",
-  backdropFilter: "blur(10px)",
-  minWidth: "80px"
-},
+  timeBox: {
+    background: "rgba(255,255,255,0.1)",
+    padding: "15px 20px",
+    borderRadius: "15px",
+    backdropFilter: "blur(10px)",
+    minWidth: "80px"
+  },
 
-timeNumber: {
-  fontSize: "28px",
-  fontWeight: "bold",
-  color: "#ff4da6",
-  textShadow: `
-    0 0 5px rgba(255, 77, 166, 0.6),
-    0 0 10px rgba(255, 77, 166, 0.4),
-    0 0 20px rgba(255, 77, 166, 0.2)
-  `
-},
+  timeNumber: {
+    fontSize: "28px",
+    fontWeight: "bold",
+    color: "#ff4da6",
+    textShadow: `
+      0 0 5px rgba(255, 77, 166, 0.6),
+      0 0 10px rgba(255, 77, 166, 0.4),
+      0 0 20px rgba(255, 77, 166, 0.2)
+    `
+  },
 
-timeLabel: {
-  fontSize: "12px",
-  marginTop: "5px",
-  opacity: 0.8
-},
-letterText: {
-  whiteSpace: "pre-line",
-  marginTop: "20px",
-  fontSize: "18px",
-  lineHeight: "1.6"
-},
+  timeLabel: {
+    fontSize: "12px",
+    marginTop: "5px",
+    opacity: 0.8
+  },
+  letterText: {
+    whiteSpace: "pre-line",
+    marginTop: "20px",
+    fontSize: "18px",
+    lineHeight: "1.6"
+  },
 
-cursor: {
-  display: "inline-block",
-  marginLeft: "3px",
-  animation: "blink 1s infinite"
-},
-heartsContainer: {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  width: "100%",
-  height: "100%",
-  overflow: "hidden",
-  pointerEvents: "none",
-  zIndex: 0
-},
+  cursor: {
+    display: "inline-block",
+    marginLeft: "3px",
+    animation: "blink 1s infinite"
+  },
+  heartsContainer: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    overflow: "hidden",
+    pointerEvents: "none",
+    zIndex: 0
+  },
 
-heart: {
-  position: "absolute",
-  bottom: "-50px",
-  animationName: "floatUp",
-  animationTimingFunction: "linear",
-  animationIterationCount: "infinite",
-  opacity: 0.6
-},
-mosaicGrid: {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
-  gap: "12px",
-  marginTop: "20px"
-},
+  heart: {
+    position: "absolute",
+    bottom: "-50px",
+    animationName: "floatUp",
+    animationTimingFunction: "linear",
+    animationIterationCount: "infinite",
+    opacity: 0.6
+  },
+  mosaicGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(120px, 1fr))",
+    gap: "12px",
+    marginTop: "20px"
+  },
 
-mosaicImage: {
-  width: "100%",
-  height: "120px",
-  objectFit: "cover",
-  borderRadius: "12px",
-  cursor: "pointer",
-  boxShadow: "0 4px 10px rgba(0,0,0,0.3)"
-},
+  mosaicImage: {
+    width: "100%",
+    height: "120px",
+    objectFit: "cover",
+    borderRadius: "12px",
+    cursor: "pointer",
+    boxShadow: "0 4px 10px rgba(0,0,0,0.3)"
+  },
 
   modalOverlay: {
     position: "fixed",
@@ -814,44 +823,53 @@ mosaicImage: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    padding: "15px",
     zIndex: 1000
   },
   modalImage: {
-    maxWidth: "90vw",
-    maxHeight: "85vh",
+    maxWidth: "100%",
+    maxHeight: "70dvh",
     objectFit: "contain",
     borderRadius: "20px",
-    boxShadow: "0 20px 60px rgba(0,0,0,0.5)"
   },
-
   closeBtn: {
     position: "absolute",
-    top: "-50px",
-    right: "-50px",
-    fontSize: "28px",
-    background: "none",
+    top: "15px",
+    right: "15px",
+    fontSize: "22px",
+    background: "rgba(0,0,0,0.5)",
+    outline: "none",
     border: "none",
     color: "white",
+    borderRadius: "50%",
+    width: "35px",
+    height: "35px",
     cursor: "pointer"
   },
 
   navLeft: {
     position: "absolute",
-    left: "-70px",
-    fontSize: "40px",
-    background: "none",
+    left: "10px",
+    fontSize: "32px",
+    background: "rgba(0,0,0,0.5)",
+    outline: "none",
     border: "none",
     color: "white",
+    borderRadius: "50%",
+
     cursor: "pointer"
   },
 
   navRight: {
     position: "absolute",
-    right: "-70px",
-    fontSize: "40px",
-    background: "none",
+    right: "10px",
+    fontSize: "32px",
+    background: "rgba(0,0,0,0.5)",
+    outline: "none",
     border: "none",
     color: "white",
+    borderRadius: "50%",
+
     cursor: "pointer"
   },
 
@@ -883,7 +901,8 @@ playBtn: {
   left: "50%",
   transform: "translateX(-50%)",
   background: "rgba(0,0,0,0.5)",
-  border: "1px solid rgba(255,255,255,0.3)",
+  outline: "none",
+  border: "none",
   color: "white",
   width: "45px",
   height: "45px",
