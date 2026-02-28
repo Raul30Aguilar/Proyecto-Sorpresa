@@ -395,6 +395,7 @@ function ImageModal({
   }, [currentIndex, images]);
 
   const [isPlaying, setIsPlaying] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -435,22 +436,30 @@ function ImageModal({
         </button>
 
         {/* Botón anterior */}
-        <button style={styles.navLeft} onClick={onPrev}>
-          ‹
-        </button>
+        {!isFullscreen && (
+          <button style={styles.navLeft} onClick={onPrev}>
+            ‹
+          </button>
+        )}
 
         {/* Imagen animada */}
         <AnimatePresence mode="wait">
           <motion.img
             key={currentIndex}
             src={images[currentIndex]}
-            style={styles.modalImage}
+            style={{
+              ...styles.modalImage,
+               maxHeight: isFullscreen ? "90dvh" : "70dvh",
+              borderRadius: isFullscreen ? "0px" : "20px",
+              cursor: "pointer"
+            }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
             onDragEnd={(e, info) => {
               if (info.offset.x < -100) onNext();
               if (info.offset.x > 100) onPrev();
             }}
+            onClick={() => setIsFullscreen(!isFullscreen)}   // 👈 esto
             initial={{
               x: direction > 0 ? 120 : -120,
               opacity: 0,
@@ -478,7 +487,8 @@ function ImageModal({
             {isPlaying ? "⏸" : "▶"}
           </button>
         </AnimatePresence>
-            
+        
+        {!isFullscreen && (
         <div style={styles.thumbnailBar}>
           <div style={styles.thumbnailWrapper}>
             {images.map((img, index) => (
@@ -496,28 +506,35 @@ function ImageModal({
                 }}
               />
             ))}
-          </div>
-
-         
+          </div>         
         </div>
+        )}
+
         {/* Botón siguiente */}
-        <button style={styles.navRight} onClick={onNext}>
-          ›
-        </button>
+        {!isFullscreen && (
+          <button style={styles.navRight} onClick={onNext}>
+            ›
+          </button>
+        )}
 
         {/* Contador */}
-        <div style={styles.counter}>
-          {currentIndex + 1} / {images.length}
-        </div>
+        {!isFullscreen && (
+          <div style={styles.counter}>
+            {currentIndex + 1} / {images.length}
+          </div>
+        )}
 
+        {!isFullscreen && (
         <button
           style={styles.playBtn}
           onClick={() => setIsPlaying(!isPlaying)}
         >
           {isPlaying ? "⏸" : "▶"}
         </button>
-
+        )}    
+        
         {/* Dots */}
+        {!isFullscreen && (
         <div style={styles.dots}>
           {images.map((_, index) => (
             <span
@@ -532,7 +549,7 @@ function ImageModal({
             />
           ))}
         </div>
-
+        )}
       </div>
     </motion.div>
   );
@@ -828,9 +845,8 @@ const styles = {
   },
   modalImage: {
     maxWidth: "100%",
-    maxHeight: "70dvh",
     objectFit: "contain",
-    borderRadius: "20px",
+    transition: "all 0.3s ease"
   },
   closeBtn: {
     position: "absolute",
